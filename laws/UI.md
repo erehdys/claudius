@@ -41,6 +41,15 @@ the same spot. The action bar holds one shape whenever the player is at the
 table in any capacity (acting, waiting, all in, sitting out). Dynamic layout
 is for content.
 
+## Room for the worst case (ruled 2026-11-02)
+Size every box for the most it can ever hold before anything is drawn: the
+longest note, the widest number, the second line a late answer may bring.
+A part that arrives late (a fetch, a floor, a count) lands in room already
+kept for it. Nothing grows, shrinks or moves after it first appears: no
+button that shows and then narrows, no row pushed down by a note that came
+a moment later. Keep the room empty, or wait and draw the whole state at
+once; never draw and then reflow.
+
 ## Dangerous actions are deliberate (ruled 2026-10-27)
 An action that can cost a stack in one press has no shortcut: no hotkey, no
 gesture, and no ONE-PRESS BUTTON for going all in. All in is the top of the
