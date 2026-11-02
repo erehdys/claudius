@@ -59,6 +59,13 @@ falls back to a guess. So a program that runs is a program in which
 nothing went wrong. There are NO RUNTIME CHECKS: thousands of
 re-simulations fit into 8.33 ms only without them (hvejs). The code is written so
 that a bug crashes by itself, at no cost (absent is -1, never a valid index).
+Drawing is the one exception (ruled 2026-11-02): a screen part that throws
+while it draws crashes only itself. Its box turns into a red error panel
+with the error text, the error goes to the server log, and the part draws
+again on the next turn, street or hand. Drawing writes no state (the server
+owns the hand, the seats and the money), so a broken part cannot make a
+running program wrong. It can only end a demo. State, the engine, the
+gateway and money still crash the whole program.
 - **Code is self-documenting; comments are avoided whenever possible.**
 A comment duplicates work at both write and read time; code that needs
 one to be understandable should usually be rewritten instead.
