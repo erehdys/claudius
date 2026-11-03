@@ -26,7 +26,7 @@ row. An agent never confuses "HAND" with "tested" and never confuses
 ## Certainty and valence (ruled 2026-10-20, suited; general 2026-10-21) — a corollary to Provenance
 
 Provenance says who made a thing. Certainty says how sure we are that it
-stays. Every feature carries one of three, in `CERTAINTY.md`:
+stays. Every feature carries one of four, in `CERTAINTY.md`:
 
 - **ETERNAL** — ruled by the owner and proven in real use (real play, a
   client's review). It changes only by a new ruling that names it.
@@ -34,6 +34,9 @@ stays. Every feature carries one of three, in `CERTAINTY.md`:
 - **UNCERTAIN** — built without a ruling, a placeholder, a test of an
   idea, doubted by the owner, or moved or rebuilt twice. Two moves make
   anything UNCERTAIN, whatever it was.
+- **EXPERIMENTAL** — ruled by the owner as for testing or fun only, not
+  expected to earn or ship. It is kept running and nothing more: no
+  polish, nothing built on it, the first to go (the user, 2026-11-03).
 
 And one of three **valences**, what rides on it: HIGH, MID, LOW. Each
 project says in its `CERTAINTY.md` what its three mean.
