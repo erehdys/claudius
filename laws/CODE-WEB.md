@@ -48,3 +48,69 @@ Before CSS work, say which stylesheets will change, and keep to that list.
 The user edits styles at the same time, often in DevTools; two writers on
 one sheet clobber each other. A sheet the user is editing gets asked about,
 or the rules go in another sheet.
+
+## Properties in groups (ruled 2026-10, suited_rewrite)
+A rule lists its declarations in one order, so any property is found in
+the same place in every rule:
+
+```css
+.fbet {
+  /* layout */
+    /* position */
+    position: absolute;
+    z-index: 888;
+
+    /* dimensions */
+    height: 3.5vh;
+    min-width: calc(12 * var(--vhf));
+
+  /* content */
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    padding: .2vh .7ch;
+    white-space: nowrap;
+
+  /* text */
+    font-size: calc(3 * var(--vhf));
+    letter-spacing: .14em;
+    color: rgb(234, 230, 220);
+
+  /* styling */
+    border-radius: .5vh;
+    background: var(--ink);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, .38);
+
+  /* motion */
+    transition: opacity .2s;
+}
+```
+
+Custom properties come first. A rule of a few declarations keeps the order
+on one line, without the labels. Within a group, a shorthand stays before
+the longhands that refine it.
+
+## What makes a box outgrow its parent (ruled 2026-11-04, suited)
+These size a box past what its `width` and `height` say, or past its
+parent, outside the arithmetic one expects. Each has cost a clipped or
+overflowing box here:
+
+- **padding** and **border** with a set `width` or `height`: the default
+  `content-box` adds them on top (a `width: 100%` row with 18px of padding
+  is the parent plus 36px). `box-sizing: border-box`, or no set width.
+- **margin** on a `width: 100%` box: it adds outside.
+- **min-width** / **min-height**: they beat `width`, `max-width` and
+  `flex-shrink`. A flex item's default `min-width: auto` is its content's
+  width, so a long name or a `nowrap` line pushes the row wider: give the
+  item `min-width: 0`.
+- **white-space: nowrap**, long unbroken words, and **letter-spacing**
+  (it adds after the last letter too): the content sets the width.
+- **1fr** grid tracks: `1fr` is `minmax(auto, 1fr)`, never narrower than
+  its content. `minmax(0, 1fr)`.
+- **gap** between fixed-size children: the sum is the children plus every
+  gap.
+- **vw** / **vh**: measured on the window, not the parent, scrollbars
+  included.
+- **transform**, **translate**, **box-shadow** and **outline** take no
+  layout room but paint outside the box, where an `overflow: hidden`
+  ancestor clips them.
