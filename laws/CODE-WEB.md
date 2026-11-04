@@ -37,3 +37,14 @@ The agent does not
 open the browser pane, drive the page, or take screenshots to check its
 own work. It compiles, runs the node scenarios and tests, and hands over
 what to look at: the page, the steps, and what each step should show.
+
+Layout invariant checks are allowed (ruled 2026-11-03, suited): a script
+that forces a size and reports what overlaps, or the least height that
+holds everything, measured at rest. Never snapshots of animation frames,
+never a probe kept as a test.
+
+## Name the stylesheets first (ruled 2026-10, suited)
+Before CSS work, say which stylesheets will change, and keep to that list.
+The user edits styles at the same time, often in DevTools; two writers on
+one sheet clobber each other. A sheet the user is editing gets asked about,
+or the rules go in another sheet.

@@ -119,3 +119,21 @@ over "for the maximum $2.16 more"; "min 31.20 till 14:05" over "you left
 this table with $31.20 within the hour: until 14:05 you come back with at
 least $31.20". A rule that needs a sentence goes in the docs, not on the
 screen. State already shown elsewhere on screen is not shown twice.
+
+## Every button answers (ruled 2026-10-29, suited)
+A press that starts a long wait (a chain, a deposit, a wallet) shows it is
+working: disabled, a busy label. Then it says what came of it, or why it
+failed, beside the button. A button that picks a value shows itself pressed
+while the value is its value, however the value got there. What happened:
+players pressed the mint button and the bet presets, saw nothing, and
+thought them broken.
+
+## No flashes (ruled 2026-11-01, suited)
+After a press, an armed move or a turn change, the end state lands in one
+step. Nothing in between: no interim "called" label, no one-frame bar, no
+fade on state that changes every turn (enabled, acting, markers, pot, log
+lines, toggles), no empty frame before an effect fills it. Go straight to
+the end state, optimistically where the server's answer is near certain;
+state the first frame needs is derived in render or set before paint.
+Designed motion stays (a deal, a fold's flight, a win). A busy state is
+only for the long waits above.

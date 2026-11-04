@@ -72,6 +72,10 @@ one to be understandable should usually be rewritten instead.
 The comments worth keeping are WHY-comments — decisions, repealed laws,
 paid-for quirks — never WHAT-comments narrating the next line. When a
 WHAT-comment appears necessary, that is the rewrite signal Doom 3 means.
+While a codebase is iterating fast, new code carries no comments at all
+but a one-line WHY for a quirk that already cost an outage or a bug
+(ruled 2026-10-18, suited). Never a comment about what was removed,
+replaced or used to be: that history is git's.
 - **Locally coherent.** 
 **Local code explains — or at least hints at — the overall system
 design.** Reading any one place should teach you the shape of the whole.

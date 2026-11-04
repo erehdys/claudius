@@ -121,6 +121,16 @@ removed in the same change set — unless explicitly ruled otherwise. A
 superseded mechanism left standing is not backup, it is a second writer
 with a stale gate. Outdated code is deleted as soon as it is outdated.
 
+No half measures (ruled 2026-10-21, suited). When a direction is chosen,
+the old thing goes in the same change: no toggle kept just in case, no
+backup code path, no parallel tree of pages, no dark copy of a replaced
+design. Before building, ask whether the change leaves two ways to do one
+thing; if it does, remove the old way or stop and say so. Say it plainly
+when the user proposes one too. A feature switch is only for what a ruling
+keeps off in production, never a fallback for a design. What happened: an
+/alpha and /classic split made a demo feel half broken, and two look-alike
+popups shipped for one feature.
+
 ## Scenarios, not tests
 Tests are rapidly made outdated while developing new features,
 can fail to catch unexpected behavior due to it being nominally correct,
@@ -136,3 +146,29 @@ mechanic works today; add a scenario that shows what it is for.
 Never a bare "verified". A report lists what ran and what it checked:
 `✓ move: 3 steps at 360 ms · ✓ reach: impact tick 32 · ✓ twostrikes:
 second waits on capacity`.
+
+## Every feature has a spec (ruled 2026-11-04, suited)
+`docs/specs/` holds one living document per feature: what it is for, how
+it behaves, every state it has as a text layout (UI.md, "Draw the whole
+screen"), its rules with who set each one (`owner` or `agent`) and when,
+and where the code is. A dated design or plan written before building is
+not a spec; it is history. A change set that changes how a feature works
+changes its spec in the same change set; one that touches a feature with no
+spec writes it. `docs/specs/README.md` is the index of every feature and
+says which have a spec. The spec says what a feature must do; RULINGS.md
+keeps the open questions, CHANGES.md what was done.
+
+## Deploy what is committed (ruled 2026-10, suited)
+A deploy runs from a commit that is pushed. A request to deploy is a
+request to commit and push first. What happened: a deploy ran from
+uncommitted work, and a redeploy from the last commit would have lost it.
+
+## Talking to the user
+- A change report opens with one line (what changed, live or not, checked
+  or not), then one bullet per part, each led by a bold label naming the
+  part ("**Plates:** …"). The user scans the labels and reads one line
+  (ruled 2026-10-29, suited).
+- When the user writes to someone else, give an outline: the points, the
+  figures, the question to ask. Never a message ready to paste; it reads as
+  not theirs (ruled 2026-10-27, suited). Tighten their own draft only when
+  asked.
