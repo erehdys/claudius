@@ -173,7 +173,7 @@ uncommitted work, and a redeploy from the last commit would have lost it.
   not theirs (ruled 2026-10-27, suited). Tighten their own draft only when
   asked.
 - A list for someone else names the things and stops. No selling and no
-  description after the name; the reader asks about the one he wants
+  description after the name; the reader asks about the one they want
   (ruled 2026-11-09, suited). The feature list for the owner went from
 
       8. **Card faces.** Classic, corners, fanned; raised or peeking; one set of faces for every game.
