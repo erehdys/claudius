@@ -128,6 +128,31 @@ screenshotting it. People who mock plain `if` / `else` are wrong.
      small function that returns from each branch).
   4. A lookup object (`{ f: 'fold', c: 'call' }[w]`) is data, not a branch,
      and stays where it reads better.
+  5. No body on the line of its head (the user, 2026-11-14): `if`, `for`,
+     `while`, `else`, a `switch` case, a match arm, a function, a method and a lambda put
+     their body on lines of their own. In GDScript, `a if c else b` is a
+     ternary and becomes a block.
+  6. WHITESPACE DRAWS THE GRAPH (the user, 2026-11-14). Written this way,
+     a function is its own control-flow graph, drawn in text, the same
+     graph a Graphviz file draws:
+     - one `if` is one decision, a diamond. Its block is the "yes" edge;
+       its `else`, or the next line, is the "no" edge.
+     - The indentation is the depth in the graph: a line stands as far
+       from the margin as the number of decisions it waits on.
+     - An `else if` chain is a column of diamonds, each one asked only
+       when every one above it said no.
+     - A `return`, `continue` or `break` is an edge out of the graph, an
+       oval. Guard clauses at the top cut the side branches off early, so
+       the main path stays at the left margin and at the bottom: the
+       spine of the graph.
+     - Reading down the page is following the edges.
+     A ternary hides a diamond inside an expression, and a body on the line
+     of its head hides a node: the graph is still there, but the eye does
+     not see it. Deep nesting is a wide graph; a guard clause or a function
+     of its own makes it narrow again. THE TEST: draw the function as a
+     `.dot` (a diamond per `if`, a box per statement, an oval per exit). A
+     shape in the drawing that the text does not show is a reason to
+     rewrite the text.
 This supersedes "Ternaries: one choice, two values" (2026-10-27).
 - **Document order beats DRY**
 A layout written as a list, in the order things appear on screen, run on the

@@ -163,6 +163,28 @@ A deploy runs from a commit that is pushed. A request to deploy is a
 request to commit and push first. What happened: a deploy ran from
 uncommitted work, and a redeploy from the last commit would have lost it.
 
+Pushed and deployed are two words for two facts (the user, 2026-11-14). A
+push updates the git remote; a deploy updates what the site serves. One
+can happen without the other, so a report names each one that happened,
+and calls a change live only after a deploy and its live check.
+
+## One worktree per session (ruled 2026-11-14)
+A session that changes files works in its own git worktree, on its own
+branch. Its commit then holds only its own work, and the user merges the
+branches when they choose. A session that only reads can share a folder.
+What happened: two sessions changed the same files in one folder, and the
+user could not tell whether "commit and push?" would take in the other
+session's unfinished work.
+
+Where sessions share a folder all the same:
+- A session commits only the files it changed, named by path
+  (`git commit -- <paths>`). A plain `git commit` takes everything staged,
+  the other session's files too.
+- A file that two sessions changed is committed only when both are
+  finished.
+- The session checks for itself whether the other one is finished, then
+  asks the user one plain question that names the files.
+
 ## Talking to the user
 - A change report opens with one line (what changed, live or not, checked
   or not), then one bullet per part, each led by a bold label naming the
@@ -181,3 +203,30 @@ uncommitted work, and a redeploy from the last commit would have lost it.
   to
 
       8. **Card faces.**
+
+## Agent text goes in a fold (ruled 2026-11-11)
+Agent-written text is accurate and too long, and people do not read it
+(Simon Willison, "Hide your slop PR descriptions behind
+`<details><summary>`", 2026-11-09). PR and MR descriptions, issue and
+review comments, long reports in chat, and entries in CHANGES, FINDINGS
+and specs open with the shortest text that brings a reader up to speed:
+what the work is for and whether it needs their attention, a screenshot if
+one helps. The full text goes in a fold under it:
+
+    Inventory drag drops on the nearest free slot. *(agent's opener)*
+
+    <details>
+    <summary>Claude Opus 5.5, high effort</summary>
+
+    The full text.
+
+    </details>
+
+- The summary names the model and the effort.
+- The agent's opener carries the mark *(agent's opener)* until the user
+  rewrites it (Provenance). An opener the user wrote has no mark.
+- Keep a blank line after `<summary>…</summary>` and before `</details>`,
+  or GitHub and GitLab show the Markdown inside as plain text.
+- Text that fits on one screen gets no fold.
+- In chat, the change report's first line and bold labels ("Talking to
+  the user") are the opener; the rest goes in the fold.
